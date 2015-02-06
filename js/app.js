@@ -82,7 +82,9 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function(allowedKeys) {
 
 }
-
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
