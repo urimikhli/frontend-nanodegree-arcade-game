@@ -25,6 +25,8 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     // col * 101, row * 83
     this.x = this.movement(this.speed_factor(this.row),dt);
+    //checkCollision();
+
 }
 
 // Draw the enemy on the screen, required method for game
