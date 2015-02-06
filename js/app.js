@@ -42,13 +42,16 @@ Enemy.prototype.speed_factor = function (row){
 }
 //enemy movement
 Enemy.prototype.movement = function (speed_factor,dt){
-    if ( this.x < 5) {
-        speed_factor = speed_factor + dt;
-        return this.x + speed_factor;
+    var move = 0;
+    //normal movement
+    speed_factor = speed_factor + dt;
+    move =  this.x + speed_factor;
+
+    //reappear at random interval
+    if (this.x >= getRandomArbitrary(5.5, 12)) {
+        move = 0;
     }
-    else if (this.x >= 5) {
-        return 0;
-    }
+    return move;
 }
 
 // Now write your own player class
