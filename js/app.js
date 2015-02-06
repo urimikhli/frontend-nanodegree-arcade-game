@@ -24,9 +24,6 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     // col * 101, row * 83
-    if (this.num > 3){
-        this.x = this.x + allEnemies[this.row-1].x + 65;
-    }
     this.x = this.movement(this.speed_factor(this.row),dt);
 }
 
@@ -48,7 +45,7 @@ Enemy.prototype.movement = function (speed_factor,dt){
     move =  this.x + speed_factor;
 
     //reappear at random interval
-    if (this.x >= getRandomArbitrary(5.5, 12)) {
+    if (this.x >= getRandomArbitrary(6, 12)) {
         move = 0;
     }
     return move;
@@ -88,7 +85,6 @@ Player.prototype.handleInput = function(allowedKeys) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var numEnemies = 3;
 var numEnemies = 4;
 var allEnemies = [];
 for (i = 0; i < numEnemies; i++) {
