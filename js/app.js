@@ -79,7 +79,9 @@ Player.prototype.render = function() {
 }
 
 //handle keypress
-Player.prototype.handleInput = function(allowedKeys) {
+Player.prototype.handleInput = function(keyPressed) {
+    //console.log(keyPressed);
+    //up,down,left,right
 
 }
 function getRandomArbitrary(min, max) {
