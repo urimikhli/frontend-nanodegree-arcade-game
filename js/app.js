@@ -3,16 +3,18 @@ var Enemy = function(num) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+
     this.num = num;
     this.x = 0;
     //need to handle more then 3 enemy sprites
     if (num < 3) {
         this.row = num + 1;
     } else {
+        //modulus 3 will always result in a number from 0 to 2
         this.row = num % 3 + 1;
     }
+    // The image/sprite for our enemies, this uses
+    // a helper we've provided to easily load images8
     this.y = this.row;
     this.sprite = 'images/enemy-bug.png';
 }
@@ -24,13 +26,13 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     // col * 101, row * 83
-    this.x = this.movement(this.speed_factor(this.row),dt);
-    //checkCollision();
 
+    this.x = this.movement(this.speed_factor(this.row),dt);
 }
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
+
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 65);
 
 }
@@ -41,17 +43,35 @@ Enemy.prototype.speed_factor = function (row){
 }
 //enemy movement
 Enemy.prototype.movement = function (speed_factor,dt){
-    var move = 0;
+    var new_location = 0;
     //normal movement
     speed_factor = speed_factor + dt;
-    move =  this.x + speed_factor;
+    new_location =  this.x + speed_factor;
 
     //reappear at random interval
     if (this.x >= getRandomArbitrary(6, 12)) {
-        move = 0;
+        new_location = 0;
     }
-    return move;
+
+    new_location = this.checkEnemyCollision(new_location, this.row);
+    return new_location;
 }
+Enemy.prototype.checkEnemyCollision = function (new_location,row) {
+    var current_enemy = this;
+    allEnemies.forEach(function(enemy) {
+        //all OTHER enemies on same row and in first column
+        if (new_location == 0) {
+            if (enemy.row == row && this.num != enemy.num && enemy.x < enemy_spacing) {
+                new_location = 7 //not visible
+                return new_location;
+            }
+        }
+
+    });
+
+    return new_location;
+}
+
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -91,7 +111,8 @@ function getRandomArbitrary(min, max) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var numEnemies = 4;
+var numEnemies = 5;
+var enemy_spacing = 2; //range 2-5
 var allEnemies = [];
 for (i = 0; i < numEnemies; i++) {
     allEnemies.push(new Enemy(i));
