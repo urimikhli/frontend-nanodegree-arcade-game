@@ -37,8 +37,8 @@ Enemy.prototype.render = function() {
 
 }
 //enemy speed
-Enemy.prototype.speed_factor = function (row){
-    var speed = 0.03 - row / 100 ;
+Enemy.prototype.speed_factor = function (){
+    var speed = 0.03 - this.row / 100 ;
     return speed;
 }
 //enemy movement
