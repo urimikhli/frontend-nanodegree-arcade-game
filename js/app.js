@@ -80,6 +80,9 @@ var Player = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
+
+    this.x = 2;
+    this.y = 5;
     // The image/sprite for our Player uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
@@ -95,7 +98,7 @@ Player.prototype.update = function(dt) {
 
 // Draw the player on the screen, required method for game
 Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x* 101, this.y * 83);
 }
 
 //handle keypress
