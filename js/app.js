@@ -80,9 +80,7 @@ var Player = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
-
-    this.x = 2;
-    this.y = 5;
+    this.initial_position();
     // The image/sprite for our Player uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
@@ -104,11 +102,14 @@ Player.prototype.update = function(dt) {
     //Check row bounds
     if (this.y > 5 ) {
         this.y = 5;
-    } else if (this.y <= 0) {
-        this.y = 5;
-        this.x = 2;
+    } else if (this.y <= 0) { // reach the top, get sent back to start
+        this.initial_position();
     }
 
+}
+Player.prototype.initial_position = function() {
+    this.x = 2;
+    this.y = 5;
 }
 
 // Draw the player on the screen, required method for game
