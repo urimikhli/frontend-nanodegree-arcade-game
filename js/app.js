@@ -94,6 +94,21 @@ Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    //Check column bounds
+    if (this.x > 4 ) {
+        this.x = 4;
+    } else if (this.x < 0) {
+        this.x = 0;
+    }
+    //Check row bounds
+    if (this.y > 5 ) {
+        this.y = 5;
+    } else if (this.y <= 0) {
+        this.y = 5;
+        this.x = 2;
+    }
+
 }
 
 // Draw the player on the screen, required method for game
@@ -103,10 +118,18 @@ Player.prototype.render = function() {
 
 //handle keypress
 Player.prototype.handleInput = function(keyPressed) {
-    //console.log(keyPressed);
     //up,down,left,right
-
+    if (keyPressed == 'right') {
+        this.x = this.x + 1;
+    } else if( keyPressed== 'left') {
+        this.x = this.x - 1;
+    } else if( keyPressed == 'up') {
+        this.y = this.y - 1;
+    } else if (keyPressed == 'down') {
+        this.y = this.y + 1;
+    }
 }
+
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
