@@ -13,9 +13,10 @@ var Enemy = function(num) {
         //modulus 3 will always result in a number from 0 to 2
         this.row = num % 3 + 1;
     }
+    this.y = this.row;
+
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images8
-    this.y = this.row;
     this.sprite = 'images/enemy-bug.png';
 }
 
@@ -41,7 +42,7 @@ Enemy.prototype.speed_factor = function (){
     var speed = 0.03 - this.row / 100 ;
     return speed;
 }
-//enemy movement
+//enemy new position
 Enemy.prototype.movement = function (speed_factor,dt){
     var new_location = 0;
     //normal movement
@@ -56,6 +57,7 @@ Enemy.prototype.movement = function (speed_factor,dt){
     new_location = this.checkEnemyCollision(new_location, this.row);
     return new_location;
 }
+//dont show bug if there is another bug nearby on same row
 Enemy.prototype.checkEnemyCollision = function (new_location,row) {
     var current_enemy = this;
     allEnemies.forEach(function(enemy) {
@@ -106,7 +108,10 @@ Player.prototype.update = function(dt) {
         this.initial_position();
     }
 
+
 }
+
+//codify initial position
 Player.prototype.initial_position = function() {
     this.x = 2;
     this.y = 5;
