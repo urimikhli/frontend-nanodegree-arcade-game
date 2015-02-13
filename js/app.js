@@ -29,6 +29,12 @@ Enemy.prototype.update = function(dt) {
     // col * 101, row * 83
 
     this.x = this.movement(this.speed_factor(this.row),dt);
+
+
+    console.log(player.x, player.y);
+    if ( this.checkPlayerCollision( player.x, player.y ) ) {
+        player.initial_position();
+    }
 }
 
 // Draw the enemy on the screen, required method for game
@@ -73,7 +79,18 @@ Enemy.prototype.checkEnemyCollision = function (new_location,row) {
 
     return new_location;
 }
-
+//is there a collision with the player?
+// the absolute values of x and Y roughly represent row and column
+Enemy.prototype.checkPlayerCollision = function (px,py) {
+    var collision = false;
+    var ex = Math.ceil(this.x);
+    var ey = this.row;
+    if (px == ex && py == ey) {
+        console.log("collision:"+ex+":"+ey);
+        collision = true;
+    }
+    return collision;
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -119,7 +136,7 @@ Player.prototype.initial_position = function() {
 
 // Draw the player on the screen, required method for game
 Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x* 101, this.y * 83);
+    ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 177);
 }
 
 //handle keypress
